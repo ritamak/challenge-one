@@ -13,11 +13,8 @@ let phoneRgx = /^\d{9}$/;
 const usernameRgx = /[\w-_]+/;
 
 const StyledHeader = styled.h1`
-  font-size: 1.5em;
+  font-size: 1em;
   text-transform: capitalize;
-  @media (min-width: 600px) {
-    font-size: 2em;
-  }
 `;
 
 const ForStylingDiv = styled.div`
@@ -51,6 +48,7 @@ const StyledForm = styled.form`
   width: 100%;
   justify-content: center;
   align-items: center;
+  font-family: "Nunito", sans-serif !important;
 `;
 
 const StyledButton = styled(Button)`

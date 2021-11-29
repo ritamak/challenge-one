@@ -25,8 +25,9 @@ const StyledTypography = styled(Typography)`
   font-size: 1em !important;
   text-align: start;
   font-family: "Nunito", sans-serif;
-  @media (min-width: 600px) {
-    font-size: 1.5em !important;
+  @media (min-width: 900px) {
+    font-size: 1em !important;
+    font-weight: bold;
   }
 `;
 

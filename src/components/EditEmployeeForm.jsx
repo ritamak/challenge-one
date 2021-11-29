@@ -15,11 +15,8 @@ const StyledWrapper = styled.section`
 `;
 
 const StyledHeader = styled.h1`
-  font-size: 1.5em;
+  font-size: 1em;
   text-transform: capitalize;
-  @media (min-width: 600px) {
-    font-size: 2em;
-  }
 `;
 
 const CloseFormButtonWrapper = styled.section`
@@ -31,6 +28,7 @@ const CloseFormButtonWrapper = styled.section`
 const StyledCloseButton = styled(Button)`
   border: none;
   background: transparent;
+  padding: 0px !important;
 `;
 
 const StyledForm = styled.form`
@@ -43,7 +41,6 @@ const StyledForm = styled.form`
 const StyledButton = styled(Button)`
   background: #eeaf30 !important;
   color: white !important;
-  margin-left: 20px !important;
 `;
 
 const StyledTextField = styled(TextField)`
@@ -54,9 +51,8 @@ const StyledTextField = styled(TextField)`
 
 const ButtonWrapper = styled.section`
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   margin-top: 15px;
-  margin-left: 15px;
 `;
 
 const TextFieldWrapper = styled(Container)`

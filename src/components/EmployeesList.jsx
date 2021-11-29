@@ -11,14 +11,6 @@ import Button from "@mui/material/Button";
 import { Delete, Edit } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-const StyledHeader = styled.h1`
-  font-size: 1.5em;
-  text-transform: capitalize;
-  @media (min-width: 600px) {
-    font-size: 2em;
-  }
-`;
-
 const StyledEditIcon = styled(Edit)`
   color: black !important;
 `;
@@ -45,7 +37,7 @@ const StyledTableContainer = styled(TableContainer)`
 `;
 
 const StyledTableHead = styled(TableHead)`
-  font: "Nunito", Sans-serif;
+  font: "Nunito", Sans-serif !important;
   background: #eeaf30 !important;
 `;
 
@@ -58,6 +50,7 @@ const StyledTableCell = styled(TableCell)`
   color: black !important;
   font-weight: bold;
   padding: 5px !important;
+  font-family: "Nunito", sans-serif !important;
 `;
 
 const StyledButton = styled(Button)`
@@ -107,18 +100,29 @@ const EmployeesList = ({ employees, setEmployees }) => {
 
   return (
     <>
-      <StyledHeader>Employees</StyledHeader>
-      {employees && (
+      {employees.length ? (
         <StyledTableContainer component={Paper} elevation={10}>
           <Table>
             <StyledTableHead>
               <TableRow>
-                <StyledTableCell align="center">Name </StyledTableCell>
-                <StyledTableCell align="center">Username</StyledTableCell>
-                <StyledTableCell align="center">Phone</StyledTableCell>
-                <StyledTableCell align="center">Role</StyledTableCell>
-                <StyledTableCell align="center">Edit</StyledTableCell>
-                <StyledTableCell align="center">Delete</StyledTableCell>
+                <StyledTableCell align="center">
+                  <b>Name</b>
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  <b>Username</b>
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  <b>Phone</b>
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  <b>Role</b>
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  <b>Edit</b>
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  <b>Delete</b>
+                </StyledTableCell>
               </TableRow>
             </StyledTableHead>
             {employees.map((employee) => (
@@ -151,6 +155,10 @@ const EmployeesList = ({ employees, setEmployees }) => {
             ))}
           </Table>
         </StyledTableContainer>
+      ) : (
+        <p>
+          <b>No content to show.</b>
+        </p>
       )}
     </>
   );

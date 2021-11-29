@@ -5,7 +5,7 @@ const StyledModal = styled.section`
   position: fixed;
   top: 20vh;
   left: 5%;
-  width: 90%;
+  right: 5%;
   background-color: white;
   padding: 1rem;
   border-radius: 14px;

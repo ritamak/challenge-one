@@ -31,7 +31,6 @@ const StyledContainer = styled(Paper)`
   max-height: 600px !important;
   overflow-y: auto;
   scrollbar-width: thin;
-  margin-top: 20px;
 
   ::-webkit-scrollbar {
     width: 15px;
@@ -50,17 +49,6 @@ const StyledContainer = styled(Paper)`
   margin-bottom: 100px;
   @media (min-width: 900px) {
     margin-bottom: 0px;
-  }
-`;
-
-const StyledTitle = styled.h1`
-  width: 50%;
-  margin-top: 40px;
-  font-size: 1.5em;
-  text-transform: capitalize;
-  margin-bottom: 0px;
-  @media (min-width: 600px) {
-    font-size: 2em;
   }
 `;
 
@@ -119,7 +107,6 @@ const PostsList = ({
   posts,
   setPosts,
   employees,
-  isAddingPost,
   arrayOfNumbers,
   arrayOfNames,
 }) => {
@@ -142,44 +129,44 @@ const PostsList = ({
 
   return (
     <Wrapper>
-      {!isAddingPost && (
-        <>
-          <StyledTitle>Posts</StyledTitle>
-          <StyledContainer elevation={10}>
-            <StyledList sx={{ width: "100%" }} elevation={10}>
-              {posts &&
-                posts.map((post) => (
-                  <>
-                    <Divider variant="inset" component="li" />
-                    <StyledListItem alignItems="center">
-                      <ListItemAvatar>
-                        <Avatar
-                          alt="Remy Sharp"
-                          src="/static/images/avatar/1.jpg"
-                        />
-                      </ListItemAvatar>
-                      <Post
-                        text={post.text}
-                        postId={post.id}
-                        employees={employees}
-                        arrayOfNumbers={arrayOfNumbers}
-                        arrayOfNames={arrayOfNames}
-                      />
-                      <StyledLink to={`/posts/${post.id}`}>
-                        <StyledEditIcon />
-                      </StyledLink>
+      <StyledContainer elevation={10}>
+        <StyledList sx={{ width: "100%" }} elevation={10}>
+          {posts.length ? (
+            posts.map((post) => (
+              <>
+                <Divider variant="inset" component="li" />
+                <StyledListItem alignItems="center">
+                  <ListItemAvatar>
+                    <Avatar
+                      alt="Remy Sharp"
+                      src="/static/images/avatar/1.jpg"
+                    />
+                  </ListItemAvatar>
+                  <Post
+                    text={post.text}
+                    postId={post.id}
+                    employees={employees}
+                    arrayOfNumbers={arrayOfNumbers}
+                    arrayOfNames={arrayOfNames}
+                  />
+                  <StyledLink to={`/posts/${post.id}`}>
+                    <StyledEditIcon />
+                  </StyledLink>
 
-                      <StyledButton onClick={() => deletePostHandler(post.id)}>
-                        <StyledDeleteIcon />
-                      </StyledButton>
-                    </StyledListItem>
-                    <Divider variant="inset" component="li" />
-                  </>
-                ))}
-            </StyledList>
-          </StyledContainer>
-        </>
-      )}
+                  <StyledButton onClick={() => deletePostHandler(post.id)}>
+                    <StyledDeleteIcon />
+                  </StyledButton>
+                </StyledListItem>
+                <Divider variant="inset" component="li" />
+              </>
+            ))
+          ) : (
+            <p>
+              <b>No posts to show</b>
+            </p>
+          )}
+        </StyledList>
+      </StyledContainer>
     </Wrapper>
   );
 };

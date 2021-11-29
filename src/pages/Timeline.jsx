@@ -37,7 +37,6 @@ const StyledDivider = styled(Divider)`
 
 const StyledDividerTwo = styled(Divider)`
   display: none;
-
   @media (min-width: 900px) {
     display: inline-block;
     border-color: #eeaf30 !important;

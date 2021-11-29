@@ -1,9 +1,11 @@
-import styled from "styled-components";
-import { Button, TextField, Container } from "@mui/material";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import { objToArray } from "../utils/utils";
 import Modal from "../UI/Modal";
-import { useNavigate } from "react-router-dom";
+import TextInput from "react-autocomplete-input";
+import "react-autocomplete-input/dist/bundle.css";
+import { Button, Container } from "@mui/material";
 import { Close } from "@mui/icons-material";
 
 const StyledWrapper = styled.section`
@@ -38,7 +40,7 @@ const StyledButton = styled(Button)`
   color: white !important;
 `;
 
-const StyledTextField = styled(TextField)`
+const StyledTextField = styled(TextInput)`
   background: white;
   width: 100%;
   margin-bottom: 20px !important;
@@ -58,7 +60,15 @@ const StyledHeader = styled.h1`
   text-transform: capitalize;
 `;
 
-const EditPostForm = ({ onClose, onCloseModal, setPosts, id, myPost }) => {
+const EditPostForm = ({
+  arrayOfNames,
+  arrayOfNumbers,
+  onClose,
+  onCloseModal,
+  setPosts,
+  id,
+  myPost,
+}) => {
   const navigate = useNavigate();
 
   const editPostHandler = async (event) => {
@@ -91,6 +101,8 @@ const EditPostForm = ({ onClose, onCloseModal, setPosts, id, myPost }) => {
     }
   };
 
+  let enteredInputs = [];
+
   return (
     <Modal>
       {myPost && (
@@ -110,6 +122,12 @@ const EditPostForm = ({ onClose, onCloseModal, setPosts, id, myPost }) => {
                 id="text"
                 autoComplete="off"
                 label={myPost.text}
+                trigger={["@", "#"]}
+                changeOnSelect={(trigger, slug) => {
+                  enteredInputs.push(slug);
+                  return slug.trim();
+                }}
+                options={{ "@": arrayOfNames, "#": arrayOfNumbers }}
               />
             </TextFieldWrapper>
             <ButtonWrapper>

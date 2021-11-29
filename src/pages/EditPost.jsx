@@ -3,7 +3,14 @@ import axios from "axios";
 import EditPostForm from "../components/EditPostForm";
 import { useParams } from "react-router-dom";
 
-const EditPost = (props) => {
+const EditPost = ({
+  arrayOfNames,
+  arrayOfNumbers,
+  setPosts,
+  posts,
+  onClose,
+  onCloseModal,
+}) => {
   const [myPost, setMyPost] = useState(null);
   const { id } = useParams();
 
@@ -29,11 +36,13 @@ const EditPost = (props) => {
   return (
     <EditPostForm
       myPost={myPost}
-      setPosts={props.setPosts}
-      onClose={props.onClose}
-      posts={props.posts}
+      setPosts={setPosts}
+      onClose={onClose}
+      posts={posts}
       id={id}
-      onCloseModal={props.onCloseModal}
+      onCloseModal={onCloseModal}
+      arrayOfNumbers={arrayOfNumbers}
+      arrayOfNames={arrayOfNames}
     />
   );
 };

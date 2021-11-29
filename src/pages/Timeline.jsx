@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import Layout from "../components/Layout";
 import NewPostForm from "../components/NewPostForm";
 import PostsList from "../components/PostsList";
 import styled from "styled-components";
 import Divider from "@mui/material/Divider";
-import { objToArray } from "../utils/utils";
 
 const Wrapper = styled.section`
   display: flex;
@@ -53,46 +51,14 @@ const Timeline = ({
   posts,
   setPosts,
   setIsLoading,
+  arrayOfNames,
+  arrayOfNumbers,
 }) => {
   const [isAddingPost, setIsAddingPost] = useState(false);
 
   const startAddingPostHandler = (event) => {
     setIsAddingPost(true);
   };
-
-  useEffect(() => {
-    (async () => {
-      try {
-        await axios
-          .get(
-            `https://project-three-413a1-default-rtdb.europe-west1.firebasedatabase.app/posts.json`
-          )
-          .then(({ data }) => {
-            const arrayOfPosts = objToArray(data);
-            setIsLoading(false);
-            setPosts(arrayOfPosts);
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-      } catch (err) {
-        console.error("Error:", err);
-      }
-    })();
-  }, [setIsLoading, setPosts]);
-
-  let arrayOfNames = [];
-  let arrayOfNumbers = [];
-
-  employees.map((employee) => {
-    arrayOfNames.push(employee.name);
-    return arrayOfNames;
-  });
-
-  employees.map((employee) => {
-    arrayOfNumbers.push(employee.phone);
-    return arrayOfNumbers;
-  });
 
   if (isLoading) {
     return <p>Loading...</p>;

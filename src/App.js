@@ -48,6 +48,19 @@ const App = () => {
     navigate("/");
   };
 
+  let arrayOfNames = [];
+  let arrayOfNumbers = [];
+
+  employees.map((employee) => {
+    arrayOfNames.push(employee.name);
+    return arrayOfNames;
+  });
+
+  employees.map((employee) => {
+    arrayOfNumbers.push(employee.phone);
+    return arrayOfNumbers;
+  });
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -69,6 +82,8 @@ const App = () => {
               setIsLoading={setIsLoading}
               posts={posts}
               setPosts={setPosts}
+              arrayOfNumbers={arrayOfNumbers}
+              arrayOfNames={arrayOfNames}
             />
           }
         />
@@ -100,6 +115,9 @@ const App = () => {
               open={open}
               onClickOpen={handleClickOpen}
               onCloseModal={handleCloseModal}
+              arrayOfNames={arrayOfNames}
+              arrayOfNumbers={arrayOfNumbers}
+              employees={employees}
             />
           }
         />

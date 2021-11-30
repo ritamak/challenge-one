@@ -10,7 +10,7 @@ const ContentContainer = styled.section`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  margin-top: 100px;
+  margin-top: 150px;
   width: 100%;
 `;
 

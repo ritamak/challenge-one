@@ -1,10 +1,24 @@
+import { useState } from "react";
 import styled from "styled-components";
-import { Button, TextField, Container } from "@mui/material";
+import { Button, Container, Alert } from "@mui/material";
 import axios from "axios";
 import { objToArray } from "../utils/utils";
 import Modal from "../UI/Modal";
 import { useNavigate } from "react-router-dom";
 import { Close } from "@mui/icons-material";
+import TextInput from "react-autocomplete-input";
+import "react-autocomplete-input/dist/bundle.css";
+
+const ForStylingDiv = styled.div`
+  height: 3em !important;
+  width: 100%;
+`;
+
+const StyledAlert = styled(Alert)`
+  margin: 0px !important;
+  font-family: "Nunito", sans-serif !important;
+  width: 95%;
+`;
 
 const StyledWrapper = styled.section`
   display: flex;
@@ -38,10 +52,9 @@ const StyledButton = styled(Button)`
   color: white !important;
 `;
 
-const StyledTextField = styled(TextField)`
+const StyledTextField = styled(TextInput)`
   background: white;
   width: 100%;
-  margin-bottom: 20px !important;
 `;
 
 const ButtonWrapper = styled.section`
@@ -58,14 +71,37 @@ const StyledHeader = styled.h1`
   text-transform: capitalize;
 `;
 
-const EditPostForm = ({ onClose, onCloseModal, setPosts, id, myPost }) => {
+const EditPostForm = ({
+  arrayOfNumbers,
+  arrayOfNames,
+  onClose,
+  onCloseModal,
+  setPosts,
+  id,
+  myPost,
+}) => {
+  const [error, setError] = useState(false);
+
+  const handleChange = () => {
+    setError(false);
+  };
+
   const navigate = useNavigate();
 
   const editPostHandler = async (event) => {
     event.preventDefault();
+
     let updatedPost = {
       text: event.target.text.value,
     };
+
+    const isNotEmpty = (value) => value.trim() !== "";
+
+    if (!isNotEmpty(updatedPost.text)) {
+      setError(true);
+      return;
+    }
+
     try {
       await axios
         .patch(
@@ -91,6 +127,11 @@ const EditPostForm = ({ onClose, onCloseModal, setPosts, id, myPost }) => {
     }
   };
 
+  let enteredInputs = [];
+
+  console.log(arrayOfNames);
+  console.log(arrayOfNumbers);
+
   return (
     <Modal>
       {myPost && (
@@ -110,8 +151,23 @@ const EditPostForm = ({ onClose, onCloseModal, setPosts, id, myPost }) => {
                 id="text"
                 autoComplete="off"
                 label={myPost.text}
+                onChange={handleChange}
+                trigger={["@", "#"]}
+                changeOnSelect={(trigger, slug) => {
+                  enteredInputs.push(slug);
+                  return slug.trim();
+                }}
+                options={{ "@": arrayOfNames, "#": arrayOfNumbers }}
               />
+              <ForStylingDiv>
+                {error && (
+                  <StyledAlert icon={false} severity="error">
+                    please enter a valid post
+                  </StyledAlert>
+                )}
+              </ForStylingDiv>
             </TextFieldWrapper>
+
             <ButtonWrapper>
               <StyledButton
                 onClick={onClose}

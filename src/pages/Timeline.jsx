@@ -52,6 +52,8 @@ const Timeline = ({
   isLoading,
   posts,
   setPosts,
+  arrayOfNames,
+  arrayOfNumbers,
   setIsLoading,
 }) => {
   const [isAddingPost, setIsAddingPost] = useState(false);
@@ -80,19 +82,6 @@ const Timeline = ({
       }
     })();
   }, [setIsLoading, setPosts]);
-
-  let arrayOfNames = [];
-  let arrayOfNumbers = [];
-
-  employees.map((employee) => {
-    arrayOfNames.push(employee.name);
-    return arrayOfNames;
-  });
-
-  employees.map((employee) => {
-    arrayOfNumbers.push(employee.phone);
-    return arrayOfNumbers;
-  });
 
   if (isLoading) {
     return <p>Loading...</p>;

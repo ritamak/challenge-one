@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const StyledModal = styled.section`
   position: fixed;
-  top: 20vh;
+  top: ${(props) => (props.employeeModal ? "5vh" : "20vh")};
   left: 5%;
   right: 5%;
   background-color: white;
@@ -15,6 +15,7 @@ const StyledModal = styled.section`
   @media (min-width: 768px) {
     width: 40rem;
     left: calc(50% - 20rem);
+    top: 20vh;
   }
 `;
 
@@ -28,29 +29,26 @@ const StyledBackdrop = styled.section`
   background-color: rgba(0, 0, 0, 0.75);
 `;
 
-const Backdrop = (props) => {
-  return <StyledBackdrop onClick={props.onClose} />;
+const Backdrop = ({ onClose }) => {
+  return <StyledBackdrop onClick={onClose} />;
 };
 
-const ModalOverlay = (props) => {
+const ModalOverlay = ({ children, employeeModal }) => {
   return (
-    <StyledModal>
-      <div>{props.children}</div>
+    <StyledModal employeeModal={employeeModal}>
+      <div>{children}</div>
     </StyledModal>
   );
 };
 
 const portalElement = document.getElementById("overlays");
 
-const Modal = (props) => {
+const Modal = ({ onClose, children, employeeModal }) => {
   return (
     <>
+      {ReactDOM.createPortal(<Backdrop onClose={onClose} />, portalElement)}
       {ReactDOM.createPortal(
-        <Backdrop onClose={props.onClose} />,
-        portalElement
-      )}
-      {ReactDOM.createPortal(
-        <ModalOverlay>{props.children}</ModalOverlay>,
+        <ModalOverlay employeeModal={employeeModal}>{children}</ModalOverlay>,
         portalElement
       )}
     </>

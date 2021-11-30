@@ -1,27 +1,35 @@
 import axios from "axios";
 import styled from "styled-components";
-import { Button, Paper } from "@mui/material";
-
+import { Button, Paper, Alert } from "@mui/material";
+import { useState } from "react";
 import TextInput from "react-autocomplete-input";
 import "react-autocomplete-input/dist/bundle.css";
 import { objToArray } from "../utils/utils";
 
-const Wrapper = styled(Paper)`
+const ForStylingDiv = styled.div`
+  height: 2em !important;
   width: 90%;
+`;
+
+const StyledAlert = styled(Alert)`
+  font-family: "Nunito", sans-serif !important;
+  padding: 0px !important;
+`;
+
+const Wrapper = styled(Paper)`
+  width: 80%;
   background: #fcf9f3 !important;
   padding: 20px;
 
   @media (min-width: 900px) {
     width: 100%;
-    background: #fcf9f3 !important;
-    padding: 20px;
   }
 `;
 
 const DescriptionWrapper = styled(Paper)`
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 80%;
   margin-bottom: 40px;
   background: #eeaf30 !important;
   color: black !important;
@@ -39,7 +47,7 @@ const ContentContainer = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 90%;
+  width: 80%;
   @media (min-width: 900px) {
     width: 20%;
   }
@@ -74,10 +82,11 @@ const StyledButton = styled(Button)`
 const StyledTextField = styled(TextInput)`
   background: white;
   outline: none;
-  width: 90%;
+  width: 90% !important;
   font-size: 1em;
   min-height: 70px !important;
   font-family: "Nunito", Sans-serif;
+  margin: 0px !important;
   @media (min-width: 900px) {
     font-size: 1em;
     min-height: 200px !important;
@@ -97,6 +106,14 @@ const ButtonWrapper = styled.section`
 
 const TextFieldWrapper = styled.section`
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  & > span {
+    width: 100%;
+  }
 `;
 
 const StyledParagraphs = styled.p`
@@ -110,7 +127,14 @@ const NewPostForm = ({
   arrayOfNumbers,
   setIsAddingPost,
   startAddingPostHandler,
+  event,
 }) => {
+  const [error, setError] = useState(false);
+
+  const handleChange = () => {
+    setError(false);
+  };
+
   const submitFormHandler = async (event) => {
     event.preventDefault();
     const { enteredPost } = event.target;
@@ -118,6 +142,14 @@ const NewPostForm = ({
     let newPost = {
       text: enteredPost.value,
     };
+
+    const isNotEmpty = (value) => value.trim() !== "";
+
+    if (!isNotEmpty(newPost.text)) {
+      setError(true);
+      return;
+    }
+
     try {
       await axios
         .post(
@@ -138,9 +170,11 @@ const NewPostForm = ({
         })
         .catch((error) => {
           console.error("Error:", error);
+          enteredPost.value = "";
         });
     } catch (error) {
       console.error("Error:", error);
+      enteredPost.value = "";
     }
   };
 
@@ -165,6 +199,7 @@ const NewPostForm = ({
               label="add post"
               color="warning"
               name="enteredPost"
+              onChange={handleChange}
               fullWidth
               trigger={["@", "#"]}
               changeOnSelect={(trigger, slug) => {
@@ -173,6 +208,13 @@ const NewPostForm = ({
               }}
               options={{ "@": arrayOfNames, "#": arrayOfNumbers }}
             />
+            <ForStylingDiv>
+              {error && (
+                <StyledAlert icon={false} severity="error">
+                  please enter a valid post
+                </StyledAlert>
+              )}
+            </ForStylingDiv>
           </TextFieldWrapper>
           <ButtonWrapper>
             <StyledButton

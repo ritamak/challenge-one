@@ -48,12 +48,12 @@ const App = () => {
     navigate("/");
   };
 
-  let arrayOfNames = [];
+  let arrayOfUsernames = [];
   let arrayOfNumbers = [];
 
   employees.map((employee) => {
-    arrayOfNames.push(employee.name);
-    return arrayOfNames;
+    arrayOfUsernames.push(employee.username);
+    return arrayOfUsernames;
   });
 
   employees.map((employee) => {
@@ -83,7 +83,7 @@ const App = () => {
               posts={posts}
               setPosts={setPosts}
               arrayOfNumbers={arrayOfNumbers}
-              arrayOfNames={arrayOfNames}
+              arrayOfUsernames={arrayOfUsernames}
             />
           }
         />
@@ -115,7 +115,7 @@ const App = () => {
               open={open}
               onClickOpen={handleClickOpen}
               onCloseModal={handleCloseModal}
-              arrayOfNames={arrayOfNames}
+              arrayOfUsernames={arrayOfUsernames}
               arrayOfNumbers={arrayOfNumbers}
               employees={employees}
             />

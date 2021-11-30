@@ -109,7 +109,7 @@ const PostsList = ({
   setPosts,
   employees,
   arrayOfNumbers,
-  arrayOfNames,
+  arrayOfUsernames,
 }) => {
   const deletePostHandler = (postId) => {
     axios
@@ -148,7 +148,7 @@ const PostsList = ({
                     postId={post.id}
                     employees={employees}
                     arrayOfNumbers={arrayOfNumbers}
-                    arrayOfNames={arrayOfNames}
+                    arrayOfUsernames={arrayOfUsernames}
                   />
                   <StyledLink to={`/posts/${post.id}`}>
                     <StyledEditIcon />

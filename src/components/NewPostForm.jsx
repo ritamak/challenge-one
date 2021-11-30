@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import TextInput from "react-autocomplete-input";
 import "react-autocomplete-input/dist/bundle.css";
-import { objToArray } from "../utils/utils";
+import { objToArray, isNotEmpty } from "../utils/utils";
 import styled from "styled-components";
 import { Button, Paper, Alert } from "@mui/material";
 
@@ -123,9 +123,8 @@ const StyledParagraphs = styled.p`
 
 const NewPostForm = ({
   setPosts,
-  arrayOfNames,
+  arrayOfUsernames,
   arrayOfNumbers,
-  setIsAddingPost,
   startAddingPostHandler,
   event,
 }) => {
@@ -142,8 +141,6 @@ const NewPostForm = ({
     let newPost = {
       text: enteredPost.value,
     };
-
-    const isNotEmpty = (value) => value.trim() !== "";
 
     if (!isNotEmpty(newPost.text)) {
       setError(true);
@@ -164,7 +161,6 @@ const NewPostForm = ({
             .then(({ data }) => {
               const newPosts = objToArray(data);
               setPosts(newPosts);
-              setIsAddingPost(false);
               enteredPost.value = "";
             });
         })
@@ -206,7 +202,7 @@ const NewPostForm = ({
                 enteredInputs.push(slug);
                 return slug.trim();
               }}
-              options={{ "@": arrayOfNames, "#": arrayOfNumbers }}
+              options={{ "@": arrayOfUsernames, "#": arrayOfNumbers }}
             />
             <ForStylingDiv>
               {error && (

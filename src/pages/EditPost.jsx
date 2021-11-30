@@ -4,7 +4,7 @@ import axios from "axios";
 import EditPostForm from "../components/EditPostForm";
 
 const EditPost = ({
-  arrayOfNames,
+  arrayOfUsernames,
   arrayOfNumbers,
   setPosts,
   onClose,
@@ -42,7 +42,7 @@ const EditPost = ({
       id={id}
       onCloseModal={onCloseModal}
       arrayOfNumbers={arrayOfNumbers}
-      arrayOfNames={arrayOfNames}
+      arrayOfUsernames={arrayOfUsernames}
     />
   );
 };

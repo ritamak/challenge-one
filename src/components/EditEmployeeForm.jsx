@@ -148,22 +148,22 @@ const EditEmployeeForm = ({
         .then(({ data }) => {
           const myPosts = objToArray(data);
 
-          const filteredPostWithName = myPosts.filter((el) =>
-            el.text.includes(employee.name)
+          const filteredPostWithUsername = myPosts.filter((el) =>
+            el.text.includes(employee.username)
           );
           const filteredPostWithPhone = myPosts.filter((el) =>
             el.text.includes(employee.phone)
           );
 
-          if (filteredPostWithName) {
-            filteredPostWithName.map(async (post) => {
+          if (filteredPostWithUsername) {
+            filteredPostWithUsername.map(async (post) => {
               return axios
                 .patch(
                   `https://project-three-413a1-default-rtdb.europe-west1.firebasedatabase.app/posts/${post.id}.json`,
                   {
                     text: post.text.replace(
-                      employee.name,
-                      updatedEmployee.name
+                      employee.username,
+                      updatedEmployee.username
                     ),
                   }
                 )

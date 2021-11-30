@@ -73,7 +73,7 @@ const StyledHeader = styled.h1`
 
 const EditPostForm = ({
   arrayOfNumbers,
-  arrayOfNames,
+  arrayOfUsernames,
   onClose,
   onCloseModal,
   setPosts,
@@ -127,9 +127,6 @@ const EditPostForm = ({
 
   let enteredInputs = [];
 
-  console.log(arrayOfNames);
-  console.log(arrayOfNumbers);
-
   return (
     <Modal>
       {myPost && (
@@ -155,7 +152,7 @@ const EditPostForm = ({
                   enteredInputs.push(slug);
                   return slug.trim();
                 }}
-                options={{ "@": arrayOfNames, "#": arrayOfNumbers }}
+                options={{ "@": arrayOfUsernames, "#": arrayOfNumbers }}
               />
               <ForStylingDiv>
                 {error && (

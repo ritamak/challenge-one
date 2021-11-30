@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+##This project was for a code challenge.
+###The guidelines were:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The challenge consists of creating a simple post timeline. The posts consist of text but it can
+also refer to data from employees, such as username. The employees can be added and
+removed from the database (can be saved in local storage, no backend required). No logins
+or other securities are required.
+Path ‘/admin’
+This path will enable the user to add, edit and remove employees from a database.
+Requirements:
+- All fields (see below) are required;
+- ID and Phone are unique;
+- ID cannot be changed but all the other values can;
+Optional requirements:
+- Username is only valid with the format [\w-_]+
 
-## Available Scripts
+Example of a list of employees could be:
+ID USERNAME PHONE ROLE NAME
+-- -------- --------- --------- ----
+1 mathilde 992312312 CEO Mathilde Saylors
+2 alia 986733455 Designer Alia Ginder
+3 freeman 971232343 Developer Freeman Litten
+4 piedad 992362345 Sales Piedad Dewald
+5 beau 912342303 PR Beau Siegel
 
-In the project directory, you can run:
+Path ‘/’
+On this path we want to create, edit and remove posts. Similar to the Facebook timeline, on
+the top you have the ability to create a new post and below the list of previous posts is
+shown ordered by date.
+Requirements:
+- By typing ‘@’ inside a new post there should popup an autocomplete to help user
+select an employee to refer in the post;
 
-### `npm start`
+- When changing the username of an employee, it should reflect in already created
+posts. A possible solution is saving the text of the post as <employee id=”1”
+field=”username”></employee> instead of @mathilde, or #992312312;
+Optional requirements:
+- By typing ‘#’ it should popup an autocomplete to help user select the phone number;
+- Inside the post, when hovering the username or name of an employee a popup
+should show with the full details of that employee (name, username, phone, role);
+- Possibility to edit already posted messages.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Checklist for candidate
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Requirements for path “/admin”:
+( ) 1) User can add, edit and remove employees;
+( ) 2) All fields (ID, username, phone, role, name) are required;
+( ) 3) ID and Phone are unique;
+( ) 4) ID cannot be changed but all the other values can;
+Requirements for path “/” for posts at “/”:
+( ) 1) Users can add posts on a timeline;
+( ) 2) By typing ‘@’ inside a post an autocomplete should pop up to help user select an
+employee;
+( ) 3) When changing the username of an employee, it should reflect in already created
+posts. A possible solution is saving the text of the post as <employee id=”1”
+field=”username”></employee> instead of @mathilde, or #992312312;
+( ) All data is saved and retrieved by services;
+( ) Although you can use external libraries, you managed to get it to work by yourself.
+Evaluation criteria
+( ) Checklist for candidate is completed, or an explanation for not completing any point on
+the checklist is sent to be discussed;
+( ) Any optional requirements completed are a plus;
+( ) Code is clean and well understandable;
+( ) Candidate has a keen eye for UX and details;
+( ) Candidate has thought about possible problems and found solutions for them.

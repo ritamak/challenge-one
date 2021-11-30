@@ -12,9 +12,6 @@ const ContentContainer = styled.section`
   align-items: center;
   margin-top: 100px;
   width: 100%;
-  @media (min-width: 900px) {
-    margin-top: 150px;
-  }
 `;
 
 const Layout = ({ headerLink, headerText, children }) => {

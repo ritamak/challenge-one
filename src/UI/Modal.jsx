@@ -15,7 +15,7 @@ const StyledModal = styled.section`
   @media (min-width: 768px) {
     width: 40rem;
     left: calc(50% - 20rem);
-    top: 20vh;
+    top: ${(props) => (props.employeeModal ? "5vh" : "20vh")};
   }
 `;
 

@@ -21,7 +21,7 @@ const Wrapper = styled.section`
 `;
 
 const StyledDivider = styled(Divider)`
-  height: 60px !important;
+  height: 40px !important;
   border-color: #eeaf30 !important;
   border-bottom-width: medium !important;
   align-self: center;
@@ -30,6 +30,7 @@ const StyledDivider = styled(Divider)`
   width: 40%;
   align-self: center !important;
   display: block;
+  margin-bottom: 20px !important;
   @media (min-width: 900px) {
     display: none;
   }

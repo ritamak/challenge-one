@@ -1,15 +1,17 @@
 import axios from "axios";
-import styled from "styled-components";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Button from "@mui/material/Button";
-import { Delete, Edit } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Button,
+} from "@mui/material/";
+import { Delete, Edit } from "@mui/icons-material";
 
 const StyledEditIcon = styled(Edit)`
   color: black !important;

@@ -1,13 +1,13 @@
 import { useState } from "react";
-import styled from "styled-components";
-import { Button, Container, Alert } from "@mui/material";
-import axios from "axios";
-import { objToArray } from "../utils/utils";
-import Modal from "../UI/Modal";
 import { useNavigate } from "react-router-dom";
-import { Close } from "@mui/icons-material";
+import axios from "axios";
+import { objToArray, isNotEmpty } from "../utils/utils";
+import Modal from "../UI/Modal";
 import TextInput from "react-autocomplete-input";
 import "react-autocomplete-input/dist/bundle.css";
+import styled from "styled-components";
+import { Button, Container, Alert } from "@mui/material";
+import { Close } from "@mui/icons-material";
 
 const ForStylingDiv = styled.div`
   height: 3em !important;
@@ -94,8 +94,6 @@ const EditPostForm = ({
     let updatedPost = {
       text: event.target.text.value,
     };
-
-    const isNotEmpty = (value) => value.trim() !== "";
 
     if (!isNotEmpty(updatedPost.text)) {
       setError(true);

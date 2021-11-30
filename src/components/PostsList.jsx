@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Post from "../components/Post";
 import styled from "styled-components";
@@ -11,7 +12,6 @@ import {
   Paper,
 } from "@mui/material";
 import { Edit, Delete } from "@mui/icons-material";
-import { Link } from "react-router-dom";
 
 const Wrapper = styled.section`
   display: flex;

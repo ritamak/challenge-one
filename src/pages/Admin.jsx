@@ -1,7 +1,7 @@
 import Layout from "../components/Layout";
-import styled from "styled-components";
 import NewEmployeeForm from "../components/NewEmployeeForm";
 import EmployeesList from "../components/EmployeesList";
+import styled from "styled-components";
 import Divider from "@mui/material/Divider";
 
 const StyledDivider = styled(Divider)`

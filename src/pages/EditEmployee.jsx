@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import EditEmployeeForm from "../components/EditEmployeeForm";
 
 const EditEmployee = ({ setEmployees, onClose, setPosts, onCloseModal }) => {

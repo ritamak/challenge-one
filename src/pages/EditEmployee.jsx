@@ -32,6 +32,7 @@ const EditEmployee = ({ setEmployees, onClose, setPosts, onCloseModal }) => {
       setPosts={setPosts}
       employee={myEmployee}
       setEmployees={setEmployees}
+      id={id}
       onCloseModal={onCloseModal}
     />
   );

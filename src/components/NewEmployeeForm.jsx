@@ -54,7 +54,6 @@ const StyledForm = styled.form`
 const StyledButton = styled(Button)`
   background: #eeaf30 !important;
   color: white !important;
-  margin-left: 20px !important;
 `;
 
 const StyledTextField = styled(TextField)`
@@ -65,9 +64,8 @@ const StyledTextField = styled(TextField)`
 
 const ButtonWrapper = styled.section`
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   margin-top: 15px;
-  margin-left: 15px;
 `;
 
 const TextFieldWrapper = styled(Container)`
@@ -199,7 +197,6 @@ const NewEmployeeForm = ({ employees, setEmployees }) => {
               )}
             </ForStylingDiv>
           </InputSection>
-
           <StyledTextField
             label="Name"
             color="warning"

@@ -27,7 +27,7 @@ const Wrapper = styled.section`
 const StyledContainer = styled(Paper)`
   display: flex;
   flex-direction: column;
-  width: 100% !important;
+  width: 80% !important;
   max-height: 600px !important;
   overflow-y: auto;
   scrollbar-width: thin;
@@ -49,6 +49,7 @@ const StyledContainer = styled(Paper)`
   margin-bottom: 100px;
   @media (min-width: 900px) {
     margin-bottom: 0px;
+    width: 100% !important;
   }
 `;
 

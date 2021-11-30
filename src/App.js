@@ -36,26 +36,17 @@ const App = () => {
     })();
   }, []);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        await axios
-          .get(
-            `https://project-three-413a1-default-rtdb.europe-west1.firebasedatabase.app/posts.json`
-          )
-          .then(({ data }) => {
-            const arrayOfPosts = objToArray(data);
-            setIsLoading(false);
-            setPosts(arrayOfPosts);
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-      } catch (err) {
-        console.error("Error:", err);
-      }
-    })();
-  }, [setIsLoading, setPosts]);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleCloseModal = () => {
+    navigate("/");
+  };
 
   let arrayOfNames = [];
   let arrayOfNumbers = [];
@@ -69,18 +60,6 @@ const App = () => {
     arrayOfNumbers.push(employee.phone);
     return arrayOfNumbers;
   });
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleCloseModal = () => {
-    navigate("/");
-  };
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -138,6 +117,7 @@ const App = () => {
               onCloseModal={handleCloseModal}
               arrayOfNames={arrayOfNames}
               arrayOfNumbers={arrayOfNumbers}
+              employees={employees}
             />
           }
         />
@@ -162,3 +142,5 @@ const App = () => {
 export default App;
 
 // validate usermail in form
+// edit posts
+// edit employees

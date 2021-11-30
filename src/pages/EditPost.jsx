@@ -7,8 +7,8 @@ const EditPost = ({
   arrayOfNames,
   arrayOfNumbers,
   setPosts,
-  posts,
   onClose,
+  posts,
   onCloseModal,
 }) => {
   const [myPost, setMyPost] = useState(null);

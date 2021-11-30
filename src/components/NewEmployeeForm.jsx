@@ -254,7 +254,7 @@ const NewEmployeeForm = ({ employees, setEmployees }) => {
               )}
               {hasDuplicatePhone && (
                 <StyledAlert icon={false} severity="error">
-                  phone already exists in database. phone numbers must be
+                  phone already exists in database.
                 </StyledAlert>
               )}
             </ForStylingDiv>

@@ -180,10 +180,10 @@ const NewPostForm = ({
     <ContentContainer>
       <DescriptionWrapper elevation={10}>
         <StyledParagraphs>
-          tag employees using <b>@</b>
+          <b>@</b> for usernames
         </StyledParagraphs>
         <StyledParagraphs>
-          tag phone numbers using using <b>#</b>
+          <b>#</b> for phone numbers
         </StyledParagraphs>
       </DescriptionWrapper>
       <Wrapper elevation={10}>

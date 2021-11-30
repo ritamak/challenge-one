@@ -10,8 +10,11 @@ const ContentContainer = styled.section`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  margin-top: 150px;
+  margin-top: 100px;
   width: 100%;
+  @media (min-width: 900px) {
+    margin-top: 150px;
+  }
 `;
 
 const Layout = ({ headerLink, headerText, children }) => {

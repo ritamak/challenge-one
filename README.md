@@ -1,5 +1,5 @@
-##This project was for a code challenge.
-###The guidelines were:
+This project was for a code challenge.
+The guidelines were:
 
 The challenge consists of creating a simple post timeline. The posts consist of text but it can
 also refer to data from employees, such as username. The employees can be added and

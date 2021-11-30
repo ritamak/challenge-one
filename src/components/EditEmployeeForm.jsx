@@ -1,19 +1,12 @@
-import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { objToArray, isNotEmpty, isPhone, isUsername } from "../utils/utils";
+import useInput from "../hooks/use-input";
+import Modal from "../UI/Modal";
 import styled from "styled-components";
 import { Button, TextField, Container, Alert } from "@mui/material";
-import { objToArray } from "../utils/utils";
-import Modal from "../UI/Modal";
 import { Close } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
-import useInput from "../hooks/use-input";
-
-const isNotEmpty = (value) => value.trim() !== "";
-const isPhone = (value) => value.match(phoneRgx);
-const isUsername = (value) => value.match(usernameRgx);
-
-let phoneRgx = /^\d{9}$/;
-const usernameRgx = /[\w-_]+/;
 
 const ForStylingDiv = styled.div`
   height: 3em !important;

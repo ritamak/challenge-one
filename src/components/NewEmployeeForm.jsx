@@ -1,16 +1,9 @@
-import axios from "axios";
 import { useState } from "react";
+import axios from "axios";
 import useInput from "../hooks/use-input";
+import { objToArray, isNotEmpty, isPhone, isUsername } from "../utils/utils";
 import styled from "styled-components";
 import { Button, TextField, Container, Paper, Alert } from "@mui/material";
-import { objToArray } from "../utils/utils";
-
-const isNotEmpty = (value) => value.trim() !== "";
-const isPhone = (value) => value.match(phoneRgx);
-const isUsername = (value) => value.match(usernameRgx);
-
-let phoneRgx = /^\d{9}$/;
-const usernameRgx = /[\w-_]+/;
 
 const StyledHeader = styled.h1`
   font-size: 1em;

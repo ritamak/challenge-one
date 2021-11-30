@@ -1,7 +1,6 @@
 import { styled } from "@mui/material/styles";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import { Button, Typography } from "@mui/material";
 
 const StyledButton = styled(Button)`
   width: 100%;

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { objToArray } from "../utils/utils";
 import Layout from "../components/Layout";
 import NewPostForm from "../components/NewPostForm";
 import PostsList from "../components/PostsList";
 import styled from "styled-components";
 import Divider from "@mui/material/Divider";
-import { objToArray } from "../utils/utils";
 
 const Wrapper = styled.section`
   display: flex;

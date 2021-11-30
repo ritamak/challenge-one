@@ -13,6 +13,31 @@ import {
 } from "@mui/material";
 import { Edit, Delete } from "@mui/icons-material";
 
+const DescriptionWrapper = styled(Paper)`
+  display: none;
+  @media (min-width: 600px) {
+    width: 80%;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    background: #eeaf30 !important;
+    color: black !important;
+  }
+  @media (min-width: 900px) {
+    margin-bottom: 60px;
+    margin-top: 0px;
+    width: 100%;
+  }
+`;
+
+const StyledParagraphs = styled.p`
+  padding: 0px;
+  margin: 0px;
+`;
+
 const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
@@ -46,7 +71,7 @@ const StyledContainer = styled(Paper)`
     border-radius: 10px;
   }
 
-  margin-bottom: 100px;
+  margin-bottom: 20px;
   @media (min-width: 900px) {
     margin-bottom: 0px;
     width: 100% !important;
@@ -130,6 +155,13 @@ const PostsList = ({
 
   return (
     <Wrapper>
+      {posts && (
+        <DescriptionWrapper elevation={10}>
+          <StyledParagraphs>
+            hover over <b>phone numbers</b> or <b>username</b> to get details
+          </StyledParagraphs>
+        </DescriptionWrapper>
+      )}
       <StyledContainer elevation={10}>
         <StyledList sx={{ width: "100%" }} elevation={10}>
           {posts.length ? (

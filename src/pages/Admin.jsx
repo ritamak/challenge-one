@@ -13,7 +13,7 @@ const StyledDivider = styled(Divider)`
   border-right: none !important;
   width: 60%;
   align-self: center !important;
-  margin-bottom: 60px !important;
+  margin-bottom: 20px !important;
 `;
 
 const ContentWrapper = styled.section`

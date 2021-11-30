@@ -46,18 +46,26 @@ const StyledTableHead = styled(TableHead)`
 const StyledTableBody = styled(TableBody)`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .css-apqrd9-MuiTableBody-root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const StyledTableCell = styled(TableCell)`
   color: black !important;
   font-weight: bold;
-  padding: 5px !important;
   font-family: "Nunito", sans-serif !important;
+  font-size: 1em !important;
 `;
 
 const StyledButton = styled(Button)`
   color: black !important;
-  padding: 0px !important;
+  border: none !important;
 `;
 
 const StyledLink = styled(Link)`
@@ -146,13 +154,13 @@ const EmployeesList = ({ employees, setEmployees }) => {
                     <StyledEditIcon />
                   </StyledLink>
                 </StyledTableCell>
-                <StyledButton
-                  onClick={() => deleteEmployeeHandler(employee.id)}
-                >
-                  <TableCell align="center" employee={employee}>
+                <TableCell align="center" employee={employee}>
+                  <StyledButton
+                    onClick={() => deleteEmployeeHandler(employee.id)}
+                  >
                     <Delete />
-                  </TableCell>
-                </StyledButton>
+                  </StyledButton>
+                </TableCell>
               </StyledTableBody>
             ))}
           </Table>

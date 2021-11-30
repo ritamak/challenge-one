@@ -16,4 +16,4 @@ export const isPhone = (value) => value.match(phoneRgx);
 export const isUsername = (value) => value.match(usernameRgx);
 //const reg = new RegExp("^[0-9]+$");
 let phoneRgx = /^\d{9}$/;
-const usernameRgx = /[\w-_]+/;
+const usernameRgx = /^[a-z0-9_-]{3,16}$/;

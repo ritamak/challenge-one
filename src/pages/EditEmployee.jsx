@@ -3,7 +3,13 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import EditEmployeeForm from "../components/EditEmployeeForm";
 
-const EditEmployee = ({ setEmployees, onClose, setPosts, onCloseModal }) => {
+const EditEmployee = ({
+  setEmployees,
+  employees,
+  onClose,
+  setPosts,
+  onCloseModal,
+}) => {
   const [myEmployee, setMyEmployee] = useState(null);
   const { id } = useParams();
 
@@ -33,6 +39,7 @@ const EditEmployee = ({ setEmployees, onClose, setPosts, onCloseModal }) => {
       employee={myEmployee}
       setEmployees={setEmployees}
       id={id}
+      employees={employees}
       onCloseModal={onCloseModal}
     />
   );

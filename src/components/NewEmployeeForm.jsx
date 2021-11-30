@@ -1,9 +1,9 @@
-import { useState } from "react";
 import axios from "axios";
 import useInput from "../hooks/use-input";
 import { objToArray, isNotEmpty, isPhone, isUsername } from "../utils/utils";
 import styled from "styled-components";
 import { Button, TextField, Container, Paper, Alert } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const StyledHeader = styled.h1`
   font-size: 1em;
@@ -66,7 +66,7 @@ const TextFieldWrapper = styled(Container)`
 `;
 
 const NewEmployeeForm = ({ employees, setEmployees }) => {
-  const [phoneIsDuplicated, setPhoneIsDuplicated] = useState(false);
+  const navigate = useNavigate();
 
   const {
     value: username,
@@ -76,6 +76,7 @@ const NewEmployeeForm = ({ employees, setEmployees }) => {
     inputBlurHandler: usernameBlurHandler,
     reset: resetUsername,
   } = useInput(isUsername);
+
   const {
     value: name,
     isValid: nameIsValid,
@@ -101,12 +102,15 @@ const NewEmployeeForm = ({ employees, setEmployees }) => {
     reset: resetPhone,
   } = useInput(isPhone);
 
-  let formIsValid = false;
-
-  if (usernameIsValid && nameIsValid && roleIsValid && phoneIsValid) {
-    formIsValid = true;
+  const hasDuplicatePhone = employees.find(
+    (employee) => employee.phone === phone
+  );
+  if (hasDuplicatePhone) {
+    console.log(hasDuplicatePhone);
   }
 
+  let formIsValid =
+    usernameIsValid && nameIsValid && roleIsValid && phoneIsValid;
   const addNewEmployeeHandler = async (event) => {
     event.preventDefault();
 
@@ -123,41 +127,36 @@ const NewEmployeeForm = ({ employees, setEmployees }) => {
       return;
     }
 
-    try {
-      employees.map((employee) => {
-        if (employee.phone === newEmployee.phone) {
-          setPhoneIsDuplicated(true);
-        }
-        return phoneIsDuplicated;
-      });
+    if (hasDuplicatePhone) {
+      resetPhone();
 
-      if (phoneIsDuplicated) {
-        return;
-      } else {
-        await axios
-          .post(
-            `https://project-three-413a1-default-rtdb.europe-west1.firebasedatabase.app/employees.json`,
-            newEmployee
-          )
-          .then(async () => {
-            await axios
-              .get(
-                `https://project-three-413a1-default-rtdb.europe-west1.firebasedatabase.app/employees.json`
-              )
-              .then(({ data }) => {
-                const newEmployees = objToArray(data);
-                setEmployees(newEmployees);
-                resetName();
-                resetPhone();
-                resetRole();
-                resetUsername();
-                setPhoneIsDuplicated(false);
-              });
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-      }
+      navigate("/admin");
+      return;
+    }
+
+    try {
+      await axios
+        .post(
+          `https://project-three-413a1-default-rtdb.europe-west1.firebasedatabase.app/employees.json`,
+          newEmployee
+        )
+        .then(async () => {
+          await axios
+            .get(
+              `https://project-three-413a1-default-rtdb.europe-west1.firebasedatabase.app/employees.json`
+            )
+            .then(({ data }) => {
+              const newEmployees = objToArray(data);
+              setEmployees(newEmployees);
+              resetName();
+              resetPhone();
+              resetRole();
+              resetUsername();
+            });
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     } catch (err) {
       console.error("Error:", err);
     }
@@ -253,9 +252,9 @@ const NewEmployeeForm = ({ employees, setEmployees }) => {
                   enter a valid phone number - ex: (911234567)
                 </StyledAlert>
               )}
-              {phoneIsDuplicated && (
+              {hasDuplicatePhone && (
                 <StyledAlert icon={false} severity="error">
-                  this phone number already exists
+                  phone already exists in database. phone numbers must be
                 </StyledAlert>
               )}
             </ForStylingDiv>

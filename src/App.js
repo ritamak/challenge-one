@@ -131,6 +131,7 @@ const App = () => {
               setPosts={setPosts}
               posts={posts}
               onCloseModal={handleCloseModal}
+              employees={employees}
             />
           }
         />

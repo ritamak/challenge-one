@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { objToArray, isNotEmpty, isPhone, isUsername } from "../utils/utils";
@@ -81,10 +80,9 @@ const EditEmployeeForm = ({
   onCloseModal,
   setPosts,
   id,
+  employees,
 }) => {
   const navigate = useNavigate();
-
-  const [phoneIsDuplicated, setPhoneIsDuplicated] = useState(false);
 
   const {
     value: username,
@@ -119,6 +117,13 @@ const EditEmployeeForm = ({
     reset: resetPhone,
   } = useInput(isPhone);
 
+  const hasDuplicatePhone = employees.find(
+    (employee) => employee.phone === phone
+  );
+  if (hasDuplicatePhone) {
+    console.log(hasDuplicatePhone);
+  }
+
   let formIsValid = false;
 
   if (usernameIsValid && nameIsValid && roleIsValid && phoneIsValid) {
@@ -137,6 +142,12 @@ const EditEmployeeForm = ({
     };
 
     if (!formIsValid) {
+      return;
+    }
+
+    if (hasDuplicatePhone) {
+      resetPhone();
+      navigate(`/employees/${id}`);
       return;
     }
 
@@ -230,7 +241,6 @@ const EditEmployeeForm = ({
               resetPhone();
               resetRole();
               resetUsername();
-              setPhoneIsDuplicated(false);
               navigate(`/`);
             });
         })
@@ -340,7 +350,7 @@ const EditEmployeeForm = ({
                       enter a valid phone number - ex: (911234567)
                     </StyledAlert>
                   )}
-                  {phoneIsDuplicated && (
+                  {hasDuplicatePhone && (
                     <StyledAlert icon={false} severity="error">
                       this phone number already exists
                     </StyledAlert>

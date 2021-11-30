@@ -1,3 +1,4 @@
+import { isPhone } from "../utils/utils";
 import { styled } from "@mui/material/styles";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { Button, Typography } from "@mui/material";
@@ -42,11 +43,8 @@ const HtmlTooltip = styled(({ className, ...props }) => (
   },
 }));
 
-const Post = ({ text, employees, arrayOfNames, arrayOfNumbers }) => {
-  const reg = new RegExp("^[0-9]+$");
-  const isPhone = (value) => value.match(reg);
-
-  let myEmployeeName = "";
+const Post = ({ text, employees, arrayOfUsernames, arrayOfNumbers }) => {
+  let myEmployeeUsername = "";
   let myEmployeePhone = "";
   let myEmployee;
 
@@ -59,18 +57,18 @@ const Post = ({ text, employees, arrayOfNames, arrayOfNumbers }) => {
         return myEmployeePhone;
       });
     } else {
-      arrayOfNames.map((name) => {
-        if (text.search(name) >= 0) {
-          myEmployeeName = name;
+      arrayOfUsernames.map((username) => {
+        if (text.search(username) >= 0) {
+          myEmployeeUsername = username;
         }
-        return myEmployeeName;
+        return myEmployeeUsername;
       });
     }
   }
 
   employees.map((employee) => {
     if (
-      employee.name === myEmployeeName ||
+      employee.username === myEmployeeUsername ||
       employee.phone === myEmployeePhone
     ) {
       myEmployee = employee;
@@ -80,7 +78,7 @@ const Post = ({ text, employees, arrayOfNames, arrayOfNumbers }) => {
 
   return (
     <>
-      {myEmployeeName && myEmployee && (
+      {myEmployeeUsername && myEmployee && (
         <>
           <HtmlTooltip
             placement="bottom-start"
@@ -143,7 +141,7 @@ const Post = ({ text, employees, arrayOfNames, arrayOfNumbers }) => {
           </HtmlTooltip>
         </>
       )}
-      {!myEmployee && !myEmployeePhone && !myEmployeeName && (
+      {!myEmployee && !myEmployeePhone && !myEmployeeUsername && (
         <StyledButton>
           <StyledTypography>{text}</StyledTypography>
         </StyledButton>
@@ -166,7 +164,7 @@ export default Post;
         Math.sign(text.search(employees[i].name) === 0)
       ) {
         myEmployee.push(employees[i]);
-        myEmployeeName = employees[i].name;
+        myEmployeeUsername = employees[i].name;
       }
     }
   }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import { objToArray } from "../utils/utils";
 import Layout from "../components/Layout";
@@ -52,16 +52,10 @@ const Timeline = ({
   isLoading,
   posts,
   setPosts,
-  arrayOfNames,
+  arrayOfUsernames,
   arrayOfNumbers,
   setIsLoading,
 }) => {
-  const [isAddingPost, setIsAddingPost] = useState(false);
-
-  const startAddingPostHandler = (event) => {
-    setIsAddingPost(true);
-  };
-
   useEffect(() => {
     (async () => {
       try {
@@ -93,16 +87,14 @@ const Timeline = ({
           employees={employees}
           posts={posts}
           setPosts={setPosts}
-          setIsAddingPost={setIsAddingPost}
-          startAddingPostHandler={startAddingPostHandler}
-          arrayOfNames={arrayOfNames}
+          arrayOfUsernames={arrayOfUsernames}
           arrayOfNumbers={arrayOfNumbers}
         />
         <StyledDivider flexItem />
         <StyledDividerTwo flexItem orientation="vertical" />
 
         <PostsList
-          arrayOfNames={arrayOfNames}
+          arrayOfUsernames={arrayOfUsernames}
           arrayOfNumbers={arrayOfNumbers}
           open={open}
           onClose={onClose}
@@ -112,7 +104,6 @@ const Timeline = ({
           onClickOpen={onClickOpen}
           isLoading={isLoading}
           setIsLoading={setIsLoading}
-          isAddingPost={isAddingPost}
         />
       </Wrapper>
     </Layout>

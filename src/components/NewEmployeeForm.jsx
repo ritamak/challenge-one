@@ -1,9 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import useInput from "../hooks/use-input";
 import { objToArray, isNotEmpty, isPhone, isUsername } from "../utils/utils";
 import styled from "styled-components";
 import { Button, TextField, Container, Paper, Alert } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 
 const StyledHeader = styled.h1`
   font-size: 1em;

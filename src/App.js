@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Route, Routes } from "react-router-dom";
 import Timeline from "./pages/Timeline";
@@ -6,13 +7,13 @@ import Admin from "./pages/Admin";
 import { objToArray } from "./utils/utils";
 import EditPost from "./pages/EditPost";
 import EditEmployee from "./pages/EditEmployee";
-import { useNavigate } from "react-router-dom";
 
 const App = () => {
   const [open, setOpen] = useState(false);
   const [employees, setEmployees] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [posts, setPosts] = useState([]);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -141,7 +142,3 @@ const App = () => {
 };
 
 export default App;
-
-// validate usermail in form
-// edit posts
-// edit employees

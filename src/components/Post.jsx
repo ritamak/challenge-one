@@ -58,7 +58,6 @@ const Post = ({ text, employees, arrayOfUsernames, arrayOfNumbers }) => {
   let myEmployee;
 
   let myName = arrayOfUsernames.filter((el) => text.includes(el));
-  console.log(myName);
 
   if (text) {
     if (hasPhone(text.trim()) !== null) {
@@ -90,7 +89,6 @@ const Post = ({ text, employees, arrayOfUsernames, arrayOfNumbers }) => {
       });
     }
   }
-
   employees.map((employee) => {
     if (
       employee.username === myEmployeeUsername ||

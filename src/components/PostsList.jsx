@@ -13,6 +13,13 @@ import {
 } from "@mui/material";
 import { Edit, Delete } from "@mui/icons-material";
 
+const ButtonsWrapper = styled.section`
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+`;
+
 const DescriptionWrapper = styled(Paper)`
   display: none;
   @media (min-width: 600px) {
@@ -82,6 +89,7 @@ const StyledButton = styled(Button)`
   margin-left: 10px;
   min-width: 20px !important;
   align-self: end;
+  width: 10%;
 `;
 
 const StyledDeleteIcon = styled(Delete)`
@@ -101,6 +109,7 @@ const StyledListItem = styled(ListItem)`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  font-size: 0.8em;
 `;
 
 const StyledLink = styled(Link)`
@@ -182,13 +191,15 @@ const PostsList = ({
                     arrayOfNumbers={arrayOfNumbers}
                     arrayOfUsernames={arrayOfUsernames}
                   />
-                  <StyledLink to={`/posts/${post.id}`}>
-                    <StyledEditIcon />
-                  </StyledLink>
+                  <ButtonsWrapper>
+                    <StyledLink to={`/posts/${post.id}`}>
+                      <StyledEditIcon />
+                    </StyledLink>
 
-                  <StyledButton onClick={() => deletePostHandler(post.id)}>
-                    <StyledDeleteIcon />
-                  </StyledButton>
+                    <StyledButton onClick={() => deletePostHandler(post.id)}>
+                      <StyledDeleteIcon />
+                    </StyledButton>
+                  </ButtonsWrapper>
                 </StyledListItem>
                 <Divider variant="inset" component="li" />
               </>

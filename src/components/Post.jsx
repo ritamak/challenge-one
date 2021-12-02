@@ -1,34 +1,43 @@
-import { isPhone } from "../utils/utils";
+import { hasPhone } from "../utils/utils";
 import { styled } from "@mui/material/styles";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
-import { Button, Typography } from "@mui/material";
+import { Typography, Container } from "@mui/material";
 
-const StyledButton = styled(Button)`
+const Wrapper = styled(Container)`
   width: 100%;
-  text-decoration: none;
-  border: none;
-  text-transform: none;
-  color: black;
   display: flex;
-  justify-content: flex-start;
-  :hover {
-    background: transparent;
-    cursor: default;
-  }
-  :active {
-    background: transparent;
-    cursor: default;
-  }
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
 `;
 
 const StyledTypography = styled(Typography)`
-  font-size: 1em !important;
+  font-size: 0.8em !important;
   text-align: start;
-  font-family: "Nunito", sans-serif;
-  @media (min-width: 900px) {
-    font-size: 1em !important;
-    font-weight: bold;
-  }
+  font-weight: bold !important;
+  font-family: "Nunito", sans-serif !important;
+  margin-right: 4px;
+  padding-left: 0px !important;
+`;
+
+const StyledTypographyUsername = styled(Typography)`
+  font-size: 0.8em !important;
+  text-align: start;
+  font-weight: bold !important;
+  font-family: "Nunito", sans-serif !important;
+  margin-right: 10px;
+  padding-left: 0px !important;
+  color: #eeaf30;
+  text-decoration: underline;
+`;
+
+const StyledTypographyEnd = styled(Typography)`
+  font-size: 0.8em !important;
+  text-align: start;
+  font-weight: bold !important;
+  font-family: "Nunito", sans-serif !important;
+  margin-left: -6px !important;
+  padding-left: 0px !important;
 `;
 
 const HtmlTooltip = styled(({ className, ...props }) => (
@@ -48,8 +57,24 @@ const Post = ({ text, employees, arrayOfUsernames, arrayOfNumbers }) => {
   let myEmployeePhone = "";
   let myEmployee;
 
+  let myName = arrayOfUsernames.filter((el) => text.includes(el));
+  console.log(myName);
+
   if (text) {
-    if (isPhone(text.trim()) !== null) {
+    if (hasPhone(text.trim()) !== null) {
+      arrayOfNumbers.map((number) => {
+        if (text.search(number) >= 0) {
+          myEmployeePhone = number;
+        }
+        return myEmployeePhone;
+      });
+    } else if ((hasPhone(text.trim()) !== null) & myName) {
+      arrayOfUsernames.map((username) => {
+        if (text.search(username) >= 0) {
+          myEmployeeUsername = username;
+        }
+        return myEmployeeUsername;
+      });
       arrayOfNumbers.map((number) => {
         if (text.search(number) >= 0) {
           myEmployeePhone = number;
@@ -76,10 +101,57 @@ const Post = ({ text, employees, arrayOfUsernames, arrayOfNumbers }) => {
     return myEmployee;
   });
 
+  let firstStringUsername = "";
+  let secondStringUsername = "";
+  let firstStringNumber = "";
+  let secondStringNumber = "";
+  let onlyStringUsername = "";
+  let onlyStringNumber = "";
+
+  let separated = text.split(" ");
+
+  const checkName = (name) => {
+    return name === myEmployeeUsername;
+  };
+
+  const checkNumber = (number) => {
+    return number.toString() === myEmployeePhone.toString();
+  };
+
+  let indexName = separated.findIndex(checkName);
+  let indexNumber = separated.findIndex(checkNumber);
+
+  if (indexName > 0) {
+    firstStringUsername = separated.slice(0, indexName).join(" ");
+  } else if (indexName === 0) {
+    onlyStringUsername = separated.slice(1, separated.length).join(" ");
+  }
+
+  if (indexNumber > 0) {
+    firstStringNumber = separated.slice(0, indexNumber).join(" ");
+  } else if (indexNumber === 0) {
+    onlyStringNumber = separated.slice(1, separated.length).join(" ");
+  }
+
+  if (indexName > 0) {
+    secondStringUsername = separated
+      .slice(indexName + 1, separated.length)
+      .join(" ");
+  }
+
+  if (indexNumber > 0) {
+    secondStringNumber = separated
+      .slice(indexNumber + 1, separated.length)
+      .join(" ");
+  }
+
   return (
     <>
       {myEmployeeUsername && myEmployee && (
-        <>
+        <Wrapper>
+          {indexName !== 0 && firstStringUsername && (
+            <StyledTypography>{firstStringUsername}</StyledTypography>
+          )}
           <HtmlTooltip
             placement="bottom-start"
             title={
@@ -103,15 +175,28 @@ const Post = ({ text, employees, arrayOfUsernames, arrayOfNumbers }) => {
               </>
             }
           >
-            <StyledButton>
+            {myEmployeeUsername ? (
+              <StyledTypographyUsername>
+                {myEmployee.username}
+              </StyledTypographyUsername>
+            ) : (
               <StyledTypography>{text}</StyledTypography>
-            </StyledButton>
+            )}
           </HtmlTooltip>
-        </>
+          {indexName === 0 && onlyStringUsername && (
+            <StyledTypographyEnd>{onlyStringUsername}</StyledTypographyEnd>
+          )}
+          {secondStringUsername && (
+            <StyledTypographyEnd>{secondStringUsername}</StyledTypographyEnd>
+          )}
+        </Wrapper>
       )}
 
       {myEmployeePhone && myEmployee && (
-        <>
+        <Wrapper>
+          {indexNumber !== 0 && firstStringNumber && (
+            <StyledTypography>{firstStringNumber}</StyledTypography>
+          )}
           <HtmlTooltip
             placement="bottom-start"
             title={
@@ -135,39 +220,29 @@ const Post = ({ text, employees, arrayOfUsernames, arrayOfNumbers }) => {
               </>
             }
           >
-            <StyledButton>
+            {myEmployeePhone ? (
+              <StyledTypographyUsername>
+                {myEmployee.phone}
+              </StyledTypographyUsername>
+            ) : (
               <StyledTypography>{text}</StyledTypography>
-            </StyledButton>
+            )}
           </HtmlTooltip>
-        </>
+          {indexNumber === 0 && onlyStringNumber && (
+            <StyledTypographyEnd>{onlyStringNumber}</StyledTypographyEnd>
+          )}
+          {indexNumber !== 0 && secondStringNumber && (
+            <StyledTypography>{secondStringNumber}</StyledTypography>
+          )}
+        </Wrapper>
       )}
       {!myEmployee && !myEmployeePhone && !myEmployeeUsername && (
-        <StyledButton>
+        <Wrapper>
           <StyledTypography>{text}</StyledTypography>
-        </StyledButton>
+        </Wrapper>
       )}
     </>
   );
 };
 
 export default Post;
-
-/*
-          <p>{text.replace(myEmployeePhone)}</p>
-
-
-
-  if (text) {
-    for (let i = 0; i < employees.length; i++) {
-      if (
-        Math.sign(text.search(employees[i].name) === 1) ||
-        Math.sign(text.search(employees[i].name) === 0)
-      ) {
-        myEmployee.push(employees[i]);
-        myEmployeeUsername = employees[i].name;
-      }
-    }
-  }
-
-
-*/
